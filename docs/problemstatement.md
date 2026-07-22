@@ -1,0 +1,83 @@
+# 📋 Problem Statement — Blinkit Discovery Engine
+
+> **Project**: Blinkit Cross-Category Discovery Pulse  
+> **Status**: Active
+
+---
+
+## 1. Context & Strategic Anchor
+
+Blinkit has successfully integrated into the weekly routines of millions of Indian households, mastering high-frequency, high-intent purchases across primary baseline categories like **Vegetables & Fruits**, **Dairy & Bread**, and **Munchies**. While this habit loop drives exceptional customer retention and order frequency, user behavior rapidly crystallizes into a highly repetitive transactional cycle.
+
+Customers typically open the app with a specific, immediate need, navigate straight to their "Frequently Ordered" list or use the search bar for explicit items, check out in under 60 seconds, and exit. 
+
+> [!WARNING]
+> This transactional velocity—which constitutes Blinkit's core value proposition—inadvertently creates a psychological "tunnel vision" effect. 
+
+Users remain largely blind to Blinkit’s high-margin, non-core expansion categories, such as **Pet Care, Beauty & Personal Care, Home Needs, Electronics, and Baby Care**.
+
+To unlock the next phase of Average Order Value (AOV) growth and structurally improve platform contribution margins, Blinkit must transition from a reactive utility application into an **active, high-trust discovery ecosystem**.
+
+---
+
+## 2. The Core Problem Statement
+
+> [!IMPORTANT]
+> *"How might we analyze unstructured user feedback at scale to understand the cognitive, behavioral, and UX barriers preventing habit-driven Blinkit users from cross-purchasing into new categories, and how can we use these machine-learned insights to transform cross-category discovery into a frictionless, high-trust experience?"*
+
+### System Blueprint: Monthly Cross-Category Discovery Pulse
+
+We are building an **AUTOMATED MONTHLY "DISCOVERY PULSE"** that turns public app reviews (App Store/Play Store), social media chatter (Reddit/Twitter), and customer support logs for Blinkit into a **ONE-PAGE STRATEGIC INSIGHT REPORT**. 
+
+This report is automatically compiled and delivered to cross-functional product stakeholders via **GOOGLE WORKSPACE (DOCS & GMAIL)** by utilizing **MCP (MODEL CONTEXT PROTOCOL)**. 
+
+By routing operations through dedicated MCP servers, the engine updates internal product trackers and triggers email summaries natively—eliminating ad-hoc API integrations inside the LLM agent itself.
+
+---
+
+## 3. Objectives of the AI Engine
+
+The proposed AI Engine must ingest vast streams of unstructured text to map the psychological and structural blockers keeping users in their category silos. The engine will extract actionable insights across four key pillars:
+
+| Pillar | Description | Focus Question |
+|--------|-------------|----------------|
+| **The Habit & Velocity Barrier** | Decouple why users stick rigidly to same-day grocery routines. | *Is the 10-minute delivery expectation favoring "immediate replenishment" over "considered lifestyle purchases"?* |
+| **The Trust & Information Gap** | Identify what prevents cross-exploration. | *Do users perceive Blinkit’s beauty or electronics lines as lower authenticity? Is page-level product info insufficient?* |
+| **UX Friction & Invisible Inventories** | Map where current discovery pathways fail. | *Does the hyper-fast search layout actively penalize casual browsing and serendipitous discovery?* |
+| **Segment Propensity** | Isolate early indicators of willingness to experiment. | *e.g., users complaining about late-night pharmacy unavailability vs. parents needing emergency diapers.* |
+
+---
+
+## 4. Data Architecture & Processing Blueprint
+
+The AI Engine operationalizes raw text into strategic product decisions by routing data through four distinct, automated processing layers:
+
+```mermaid
+flowchart LR
+    A["📥 Data Ingestion\n(Play/App Store, Reddit,\nTwitter, Internal Logs)"] --> B["🧠 NLP & Processing\n(Sentiment, NER,\nAspect Mining)"]
+    B --> C["💡 Insight Generation\n(Friction Mapping,\nUnmet Need Clustering)"]
+    C --> D["🚀 Product Action\n(Dynamic Bundles,\nContextual Feed Triggers)"]
+```
+
+---
+
+## 5. Expected Output & Business Impact
+
+The output of this AI engine is designed to serve as a dynamic intelligence layer feeding directly into Blinkit’s engineering and growth roadmaps:
+
+- **UX Restructuring:** Transitioning the home feed from a static grid of icons to a context-aware discovery layout (e.g., surfacing Pet Care on Sunday mornings or Personal Care when routine weekend patterns shift).
+- **Contextual Cross-Sell Triggers:** Creating high-intent hooks (e.g., if a user buys organic milk and avocados, identifying them within a "Health & Wellness" cohort to dynamically introduce premium organic personal care items during checkout).
+
+> [!NOTE]
+> **Target Metric**: Quantifiably increase the percentage of Monthly Active Customers (MAC) who purchase from at least one non-core/new category quarter-on-quarter, maximizing Customer Lifetime Value (LTV).
+
+---
+
+## 6. Insight Validation Layer (Quality Control)
+
+To ensure the AI engine delivers highly accurate and actionable business insights rather than isolated user rants or AI hallucinations, it filters all data through four quick checkpoints before dashboard delivery:
+
+1. **Cross-Platform Check:** An insight is only marked as high-confidence if it appears across multiple independent channels (e.g., both a Reddit discussion and an App Store review).
+2. **The 1.5% Volume Rule:** Isolated, one-off complaints are ignored. An issue must appear in at least 1.5% of the total analyzed text within a week to be flagged as a real trend.
+3. **Dual-Model Verification:** The engine uses a strict double-checking system where a smaller model extracts raw facts and a larger model summarizes them. If the summary introduces outside details, it is blocked.
+4. **Data Matching (Reality Check):** The AI automatically cross-checks user complaints with Blinkit's internal numbers. If the AI flags a fear about "expired products," it verifies whether internal support tickets or refunds for expired items are actually spiking to separate user perception from operational errors.

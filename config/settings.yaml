@@ -1,0 +1,15 @@
+# Core Settings
+project_name: "Blinkit Discovery Engine"
+data_paths:
+  raw: "data/raw"
+  processed: "data/processed"
+  insights: "data/insights"
+
+ingestion:
+  app_store:
+    app_id: "1406859344" # Blinkit iOS App ID
+    country: "in"
+  play_store:
+    app_id: "com.grofers.customerapp"
+  reddit:
+    subreddits: ["blinkit", "india", "indianstreetbets"]

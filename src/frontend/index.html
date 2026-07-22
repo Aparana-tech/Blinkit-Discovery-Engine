@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blinkit AI Discovery Engine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-toggle" id="sidebar-toggle">❮</div>
+        <div class="sidebar-header">
+            <span class="emoji-logo">🛒</span>
+            <h2>Review Engine</h2>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-target="dashboard">Executive Briefing</a>
+            <a href="#" class="nav-item" data-target="deepdive">Discovery Deep Dive</a>
+            <a href="#" class="nav-item" data-target="whatuserssay">What Users Say</a>
+            <a href="#" class="nav-item" data-target="strategic">Strategic Questions</a>
+            <a href="#" class="nav-item research-tab" data-target="workspace">Research Workspace</a>
+        </nav>
+        <div class="sidebar-footer">
+            <p>Unofficial analysis project — not affiliated with Blinkit.</p>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" id="main-content">
+        
+        <!-- SECTION: EXECUTIVE BRIEFING -->
+        <section id="dashboard" class="tab-content active">
+            <div class="page-header">
+                <p class="subtitle">EXECUTIVE BRIEFING</p>
+                <h1>Explore user feedback at scale</h1>
+                <p class="desc">Automated Intelligence from App Store, Play Store, and Reddit.</p>
+            </div>
+            
+            <div class="metrics-area" id="top-metrics"></div>
+            
+            <div class="charts-section">
+                <div class="chart-card glass-card">
+                    <h2>Top Friction Points</h2>
+                    <div class="chart-container"><canvas id="barChart"></canvas></div>
+                </div>
+                <div class="chart-card glass-card">
+                    <h2>Pillar Distribution</h2>
+                    <div class="chart-container pie-container"><canvas id="pieChart"></canvas></div>
+                </div>
+            </div>
+            
+            <div class="markdown-container" id="report-container">
+                <p>Loading monthly markdown report...</p>
+            </div>
+        </section>
+
+        <!-- SECTION: DISCOVERY DEEP DIVE -->
+        <section id="deepdive" class="tab-content">
+            <div class="page-header">
+                <p class="subtitle">DISCOVERY DEEP DIVE</p>
+                <h1>Where discovery breaks down</h1>
+                <p class="desc">Theme clusters ranked by volume and severity.</p>
+            </div>
+            <div class="deepdive-list" id="deepdive-list">
+                <!-- Injected via JS -->
+            </div>
+        </section>
+
+        <!-- SECTION: WHAT USERS SAY -->
+        <section id="whatuserssay" class="tab-content">
+            <div class="page-header">
+                <p class="subtitle">WHAT USERS SAY</p>
+                <h1>What users are telling us</h1>
+                <p class="desc">Theme clusters filtered by source and sentiment.</p>
+            </div>
+            
+            <!-- Filters -->
+            <div class="filters-bar">
+                <select class="filter-dropdown"><option>All Sources</option><option>Play Store</option><option>App Store</option><option>Reddit</option></select>
+                <select class="filter-dropdown"><option>All Sentiments</option><option>Negative</option><option>Mixed</option></select>
+            </div>
+            <div class="pill-filters" id="pillar-filters">
+                <button class="pill-btn active">All Pillars</button>
+                <button class="pill-btn">Habit & Velocity <span class="count">4</span></button>
+                <button class="pill-btn">UX Friction <span class="count">6</span></button>
+                <button class="pill-btn">Trust & Information <span class="count">3</span></button>
+                <button class="pill-btn">Segment Propensity <span class="count">2</span></button>
+            </div>
+
+            <div class="cards-grid" id="insights-grid">
+                <!-- Injected via JS -->
+            </div>
+        </section>
+
+        <!-- SECTION: STRATEGIC QUESTIONS -->
+        <section id="strategic" class="tab-content">
+            <div class="page-header">
+                <p class="subtitle">STRATEGIC QUESTIONS</p>
+                <h1>Project Objectives Answered</h1>
+                <p class="desc">How the AI Engine addresses the core Nextleap criteria.</p>
+            </div>
+            <div class="faq-container glass-card">
+                <details class="q-accordion"><summary>Why do users repeatedly buy from the same categories?</summary><div class="q-answer"><p><strong><span class="badge">Habit & Velocity</span></strong> Users stick to known categories because the velocity of checkout is prioritized over casual catalog exploration.</p></div></details>
+                <details class="q-accordion"><summary>What prevents users from exploring new categories?</summary><div class="q-answer"><p><strong><span class="badge">UX Friction</span></strong> The high-density, search-first UI layout heavily favors high-intent purchasing. There are limited serendipitous discovery pathways.</p></div></details>
+                <details class="q-accordion"><summary>How do users discover products today?</summary><div class="q-answer"><p><strong><span class="badge">NLP Clusterer</span></strong> Discovery currently relies heavily on external triggers rather than in-app recommendations.</p></div></details>
+                <details class="q-accordion"><summary>What role do habits play in shopping behavior?</summary><div class="q-answer"><p><strong><span class="badge">Sentiment Analysis</span></strong> Routine purchases are deeply ingrained and actively suppress cognitive willingness to cross-shop in unfamiliar categories.</p></div></details>
+                <details class="q-accordion"><summary>What information do users need before trying a new category?</summary><div class="q-answer"><p><strong><span class="badge">Trust & Information Gap</span></strong> High-ticket items require more than just an image and price. Users repeatedly complain about missing detailed product descriptions.</p></div></details>
+                <details class="q-accordion"><summary>What frustrations emerge repeatedly?</summary><div class="q-answer"><p><strong><span class="badge">Top Problem Themes</span></strong> Missing items in delivered bags, unfair cancellation/refund policies, and unexpected delivery charges.</p></div></details>
+                <details class="q-accordion"><summary>Which user segments are more likely to experiment?</summary><div class="q-answer"><p><strong><span class="badge">Segment Propensity</span></strong> Certain demographics show higher elasticity and willingness to try adjacent categories if presented contextually.</p></div></details>
+                <details class="q-accordion"><summary>What unmet needs emerge consistently across discussions?</summary><div class="q-answer"><p><strong><span class="badge">Cross-Platform Validation</span></strong> A massive unmet need for reliable, transparent customer support.</p></div></details>
+            </div>
+        </section>
+
+        <!-- SECTION: RESEARCH WORKSPACE (CHATBOT) -->
+        <section id="workspace" class="tab-content">
+            <div class="page-header">
+                <p class="subtitle">RESEARCH WORKSPACE</p>
+                <h1>Explore user conversations</h1>
+                <p class="desc">Search across all App Store and Play Store reviews — results appear inline using the RAG AI pipeline.</p>
+            </div>
+
+            <!-- Chatbot UI -->
+            <div class="chat-container">
+                <div class="chat-suggestions">
+                    <button class="chat-pill" onclick="sendPredefined('Why do users stop discovering new categories?')">Why do users stop discovering new categories?</button>
+                    <button class="chat-pill" onclick="sendPredefined('What makes Blinkit recommendations feel repetitive?')">What makes Blinkit recommendations feel repetitive?</button>
+                    <button class="chat-pill" onclick="sendPredefined('Which user segments struggle most with discovery?')">Which user segments struggle most with discovery?</button>
+                </div>
+                
+                <div class="chat-history" id="chat-history">
+                    <div class="chat-message system">
+                        <span class="avatar">🤖</span>
+                        <div class="msg-content">Hello! I am the Blinkit Discovery Engine AI. I have analyzed all the scraped reviews. Ask me anything about the user feedback!</div>
+                    </div>
+                </div>
+
+                <div class="chat-input-area">
+                    <input type="text" id="chat-input" placeholder="What are users saying about discovery?">
+                    <button id="chat-submit" class="btn-primary">Research</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

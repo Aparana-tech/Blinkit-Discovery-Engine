@@ -2,14 +2,15 @@ altair==6.2.2
 annotated-doc==0.0.4
 annotated-types==0.7.0
 anyio==4.14.2
+app-store-scraper==0.3.5
 attrs==26.1.0
 blinker==1.9.0
-# Editable install with no version control (blinkit-discovery-engine==0.1.0)
--e /Users/aparanaraghuvanshi/Nextleap Graduation project Blinkit
+-e git+https://github.com/Aparana-tech/Blinkit-Discovery-Engine.git@bae9e0a3f13b6d13fb37226d3ff6d01abe7860fa#egg=blinkit_discovery_engine
 blis==1.3.3
 cachetools==7.1.4
 catalogue==2.0.10
 certifi==2026.6.17
+chardet==3.0.4
 charset-normalizer==3.4.9
 click==8.4.2
 cloudpathlib==0.24.0

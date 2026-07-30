@@ -1,61 +1,88 @@
+import os
 import requests
 import hashlib
+import logging
 from typing import List, Dict, Any
+from datetime import datetime
+from dotenv import load_dotenv
 from .base_ingester import BaseIngester
+
+load_dotenv()
+logger = logging.getLogger(__name__)
 
 class AppStoreIngester(BaseIngester):
     def __init__(self):
         super().__init__(source_name="app_store")
-        # Default to Blinkit iOS app ID if not in config
         app_config = self.config.get('ingestion', {}).get('app_store', {})
-        self.app_id = app_config.get('app_id', '1406859344')
+        self.app_id = app_config.get('app_id', '1406859344') # Blinkit ID
         self.country = app_config.get('country', 'in')
+        self.api_key = os.getenv("SERPAPI_KEY")
 
     def fetch(self) -> Any:
-        # iTunes RSS feed for customer reviews
-        url = f"https://itunes.apple.com/{self.country}/rss/customerreviews/id={self.app_id}/sortBy=mostRecent/json"
-        response = requests.get(url)
-        response.raise_for_status()
-        return response.json()
+        if not self.api_key:
+            logger.error("No SERPAPI_KEY found in .env. Skipping Apple App Store ingestion.")
+            return []
+            
+        all_reviews = []
+        # SerpApi returns 10 reviews per page. We fetch 10 pages = 100 reviews.
+        # This keeps the usage low (10 API credits out of 250) while getting enough data to prove it works.
+        pages_to_fetch = 10 
+        
+        for page in range(1, pages_to_fetch + 1):
+            url = f"https://serpapi.com/search.json?engine=apple_reviews&product_id={self.app_id}&country={self.country}&page={page}&sort=mostrecent&api_key={self.api_key}"
+            try:
+                logger.info(f"Fetching Apple App Store reviews page {page} via SerpApi...")
+                response = requests.get(url, timeout=15)
+                if response.status_code == 200:
+                    data = response.json()
+                    reviews = data.get("reviews", [])
+                    if not reviews:
+                        logger.info("No more reviews found on this page.")
+                        break
+                    all_reviews.extend(reviews)
+                else:
+                    logger.warning(f"SerpApi Error: {response.status_code} - {response.text}")
+                    break
+            except Exception as e:
+                logger.warning(f"SerpApi request failed: {e}")
+                break
+                
+        return all_reviews
 
     def normalize(self, raw_data: Any) -> List[Dict[str, Any]]:
         normalized = []
-        feed = raw_data.get("feed", {})
-        entries = feed.get("entry", [])
-        
-        # The first entry in the RSS feed is usually metadata about the app itself
-        if entries and not entries[0].get("author"):
-            entries = entries[1:]
-
-        for entry in entries:
+        for review in raw_data:
             try:
-                review_id = entry.get("id", {}).get("label", "")
-                rating = int(entry.get("im:rating", {}).get("label", 0))
-                text = entry.get("content", {}).get("label", "")
-                # Apple RSS doesn't give a standard date field easily, so we use author info for hashing
-                author_name = entry.get("author", {}).get("name", {}).get("label", "Unknown")
+                # SerpApi 'apple_reviews' format
+                review_id = review.get('id', '')
+                if not review_id:
+                    continue
+                    
+                rating = review.get('rating', 0)
+                text = f"{review.get('title', '')} \n {review.get('text', '')}".strip()
+                author_name = review.get('author', {}).get('name', 'Unknown')
+                date_str = review.get('date', datetime.now().strftime("%Y-%m-%d"))
                 
-                if not review_id or not text:
+                if not text:
                     continue
 
                 author_hash = hashlib.sha256(author_name.encode()).hexdigest()
 
                 normalized.append({
                     "platform": "app_store",
-                    "review_id": review_id,
+                    "review_id": f"apple_{review_id}",
                     "rating": rating,
                     "text": text,
-                    # We default to today's date since RSS gives most recent
-                    "date": datetime.now().strftime("%Y-%m-%d"), 
+                    "date": date_str, 
                     "author_id_hash": author_hash
                 })
             except Exception as e:
-                self.logger.warning(f"Error parsing App Store entry: {e}")
+                logger.warning(f"Error parsing Apple App Store entry: {e}")
                 continue
 
         return normalized
 
 if __name__ == "__main__":
-    from datetime import datetime # Local import for standalone run
+    logging.basicConfig(level=logging.INFO)
     ingester = AppStoreIngester()
     ingester.run()

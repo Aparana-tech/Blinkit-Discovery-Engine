@@ -16,7 +16,7 @@ class PlayStoreIngester(BaseIngester):
             lang='en', 
             country='in', 
             sort=Sort.NEWEST, 
-            count=1000
+            count=3000
         )
         return result
 

@@ -19,21 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
-    // Make filter buttons interactive (toggle selected state)
-    let filterAlertShown = false;
-    const filterBtns = document.querySelectorAll('.filter-btn, .filter-chip');
-    filterBtns.forEach(btn => {
-        if (!btn.classList.contains('refresh-btn') && !btn.id.includes('refresh-insight-btn') && !btn.id.includes('workspace-search-btn') && !btn.innerText.includes('Download')) {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                btn.classList.toggle('selected');
-                if (!filterAlertShown) {
-                    alert("MVP Notice: Dynamic filtering is disabled in this prototype to optimize LLM API costs. The dashboard is currently displaying a comprehensive static data snapshot for July 2026.");
-                    filterAlertShown = true;
-                }
-            });
-        }
-    });
+    // Filter buttons removed for MVP presentation
 
     // Make KPI cards route to Deep Dive
     const kpiCards = document.querySelectorAll('.kpi-card');

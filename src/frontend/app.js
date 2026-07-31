@@ -211,6 +211,37 @@ document.addEventListener('DOMContentLoaded', async () => {
             options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true } } }, scales: { y: { min: 0, max: 100, ticks: { callback: function(value) { return value + "%" } } } } }
         });
 
+        // Pillar Breakdown
+        let pillarVolumes = {};
+        validClusters.forEach(c => {
+            let p = c.pillar;
+            if (p && p !== "N/A" && p !== "Unknown") {
+                pillarVolumes[p] = (pillarVolumes[p] || 0) + c.size;
+            }
+        });
+        
+        const sortedPillars = Object.keys(pillarVolumes).sort((a,b) => pillarVolumes[b] - pillarVolumes[a]);
+        let pillarHTML = '';
+        sortedPillars.forEach(p => {
+            const pct = ((pillarVolumes[p] / totalReviews) * 100).toFixed(1);
+            pillarHTML += `
+                <div style="margin-bottom: 16px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="font-weight: 500; font-size: 14px; color: var(--text-main);">${p}</span>
+                        <span style="font-size: 14px; color: var(--text-sub);">${pct}% (${pillarVolumes[p].toLocaleString()})</span>
+                    </div>
+                    <div style="width: 100%; background-color: var(--border-color); border-radius: 4px; height: 8px;">
+                        <div style="width: ${pct}%; background-color: var(--accent-brand); height: 100%; border-radius: 4px;"></div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        const pillarContainer = document.getElementById('pillar-breakdown-container');
+        if (pillarContainer) {
+            pillarContainer.innerHTML = pillarHTML;
+        }
+
         // Key Signals
         const signalsContainer = document.getElementById('signals-container');
         const frustrations = topClusters.slice(0,3).map(c => c.actionable_insight);

@@ -74,7 +74,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (data.detail) {
                 aiMsgDiv.querySelector('.msg-content').innerText = "System Error: " + data.detail;
             } else if (data.response) {
-                aiMsgDiv.querySelector('.msg-content').innerText = data.response;
+                let formatted = data.response
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/### (.*?)\n/g, '<h4>$1</h4>')
+                    .replace(/\n/g, '<br>');
+                aiMsgDiv.querySelector('.msg-content').innerHTML = formatted;
             } else {
                 aiMsgDiv.querySelector('.msg-content').innerText = "Unknown error: " + JSON.stringify(data);
             }

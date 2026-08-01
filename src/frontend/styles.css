@@ -656,3 +656,78 @@ body {
     line-height: 1.6;
     color: var(--text-main);
 }
+
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 768px) {
+    .layout {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        padding: 16px;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .nav-menu {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .nav-item {
+        padding: 8px 12px;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        font-size: 13px;
+    }
+    
+    .nav-item.active {
+        border-left: none;
+        border-bottom: 3px solid var(--accent-brand);
+    }
+    
+    .logo-section {
+        margin-bottom: 16px;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        padding: 16px;
+        width: 100%;
+    }
+    
+    .kpi-grid, .two-col-grid, .persona-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .top-filters {
+        flex-wrap: wrap;
+    }
+    
+    .kpi-split {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .chat-message {
+        max-width: 95%;
+    }
+    
+    .workspace-search-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .refresh-btn, .filter-btn, .filter-chip {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .section-title h2 {
+        font-size: 24px;
+    }
+}

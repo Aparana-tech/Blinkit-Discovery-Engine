@@ -71,7 +71,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 body: JSON.stringify({ message: msg })
             });
             const data = await res.json();
-            aiMsgDiv.querySelector('.msg-content').innerText = data.response;
+            if (data.detail) {
+                aiMsgDiv.querySelector('.msg-content').innerText = "System Error: " + data.detail;
+            } else {
+                aiMsgDiv.querySelector('.msg-content').innerText = data.response;
+            }
         } catch (e) {
             aiMsgDiv.querySelector('.msg-content').innerText = "Error reaching AI.";
         }
@@ -343,7 +347,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                     body: JSON.stringify({ message: msg })
                 });
                 const data = await res.json();
-                workspaceResults.innerHTML = `<div style="background-color: var(--bg-card-hover); padding: 24px; border-radius: 8px;"><strong>Insight:</strong><br><br>${data.response.replace(/\n/g, '<br>')}</div>`;
+                if (data.detail) {
+                    workspaceResults.innerHTML = `<span class="icon-neg">System Error: ${data.detail}</span>`;
+                } else {
+                    workspaceResults.innerHTML = `<div style="background-color: var(--bg-card-hover); padding: 24px; border-radius: 8px;"><strong>Insight:</strong><br><br>${data.response.replace(/\n/g, '<br>')}</div>`;
+                }
             } catch (e) {
                 workspaceResults.innerHTML = `<span class="icon-neg">Error reaching AI backend.</span>`;
             }

@@ -20,7 +20,7 @@ api_key = os.getenv("GROQ_API_KEY")
 if not api_key:
     logger.warning("GROQ_API_KEY not found in environment. Chatbot will fail.")
 else:
-    client = groq.Groq(api_key=api_key)
+    client = groq.AsyncGroq(api_key=api_key)
 
 class ChatMessage(BaseModel):
     message: str
@@ -70,7 +70,7 @@ If the user asks one of the core 8 strategic questions, you must directly relate
 Be extremely professional, concise, and insightful. Format your response cleanly."""
 
     try:
-        completion = client.chat.completions.create(
+        completion = await client.chat.completions.create(
             model="llama-3.1-8b-instant",
             messages=[
                 {"role": "system", "content": system_prompt},

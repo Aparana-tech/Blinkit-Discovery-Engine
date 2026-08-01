@@ -177,16 +177,19 @@ body {
     flex-direction: column;
     justify-content: center;
     cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 .kpi-card:hover {
     transform: translateY(-5px) scale(1.02);
     background-color: var(--bg-card-hover);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 25px rgba(248, 203, 70, 0.15);
+    border-color: rgba(248, 203, 70, 0.4);
 }
 .kpi-card:active {
     transform: scale(0.98);
+    box-shadow: 0 0 20px rgba(248, 203, 70, 0.5);
+    border-color: var(--accent-brand);
 }
 
 .kpi-header {
@@ -251,6 +254,21 @@ body {
     padding: 24px;
     margin-bottom: 24px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.chart-section:hover {
+    transform: translateY(-3px) scale(1.01);
+    background-color: var(--bg-card-hover);
+    box-shadow: 0 10px 25px rgba(248, 203, 70, 0.15);
+    border-color: rgba(248, 203, 70, 0.4);
+}
+
+.chart-section:active {
+    transform: scale(0.99);
+    box-shadow: 0 0 20px rgba(248, 203, 70, 0.5);
+    border-color: var(--accent-brand);
 }
 
 .chart-section h3 {

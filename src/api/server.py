@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 app = FastAPI(title="Blinkit Discovery Engine API")
 
 # Setup Groq Client Key
-api_key = os.getenv("GROQ_API_KEY")
+api_key = os.getenv("GROQ_API_KEY", "").strip()
 if not api_key:
     logger.warning("GROQ_API_KEY not found in environment. Chatbot will fail.")
 

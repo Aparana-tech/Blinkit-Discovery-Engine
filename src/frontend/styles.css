@@ -1,9 +1,9 @@
 :root {
     --bg-main: #121212;
     --bg-sidebar: #000000;
-    --bg-card: #181818;
-    --bg-card-hover: #282828;
-    --border-color: #2a2a2a;
+    --bg-card: #202020;
+    --bg-card-hover: #2e2e2e;
+    --border-color: #383838;
     --text-main: #ffffff;
     --text-sub: #a7a7a7;
     --accent-brand: #F8CB46; /* Blinkit Yellow */

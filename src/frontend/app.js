@@ -73,11 +73,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             const data = await res.json();
             if (data.detail) {
                 aiMsgDiv.querySelector('.msg-content').innerText = "System Error: " + data.detail;
-            } else {
+            } else if (data.response) {
                 aiMsgDiv.querySelector('.msg-content').innerText = data.response;
+            } else {
+                aiMsgDiv.querySelector('.msg-content').innerText = "Unknown error: " + JSON.stringify(data);
             }
         } catch (e) {
-            aiMsgDiv.querySelector('.msg-content').innerText = "Error reaching AI.";
+            aiMsgDiv.querySelector('.msg-content').innerText = "Network Error: " + e.message;
         }
         chatHistory.scrollTop = chatHistory.scrollHeight;
     }
@@ -276,9 +278,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                         body: JSON.stringify({ message: "Write a short 2 sentence qualitative executive summary of the recent user reviews, balancing praise and frustration." })
                     });
                     const data = await res.json();
-                    insightBox.innerHTML = `<h4 style="color: var(--accent-brand); margin-bottom: 12px;">AI Executive Summary</h4><p>${data.response.replace(/\n/g, '<br>')}</p>`;
+                    if (data.detail) {
+                        insightBox.innerHTML = `<span class="icon-neg">System Error: ${data.detail}</span>`;
+                    } else if (data.response) {
+                        insightBox.innerHTML = `<h4 style="color: var(--accent-brand); margin-bottom: 12px;">AI Executive Summary</h4><p>${data.response.replace(/\n/g, '<br>')}</p>`;
+                    } else {
+                        insightBox.innerHTML = `<span class="icon-neg">Unknown error: ${JSON.stringify(data)}</span>`;
+                    }
                 } catch (e) {
-                    insightBox.innerHTML = `<span class="icon-neg">Error reaching AI backend.</span>`;
+                    insightBox.innerHTML = `<span class="icon-neg">Network Error: ${e.message}</span>`;
                 }
             });
         }

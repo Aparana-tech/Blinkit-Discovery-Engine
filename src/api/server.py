@@ -15,12 +15,10 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Blinkit Discovery Engine API")
 
-# Setup Groq Client
+# Setup Groq Client Key
 api_key = os.getenv("GROQ_API_KEY")
 if not api_key:
     logger.warning("GROQ_API_KEY not found in environment. Chatbot will fail.")
-else:
-    client = groq.AsyncGroq(api_key=api_key)
 
 class ChatMessage(BaseModel):
     message: str
@@ -54,7 +52,7 @@ def get_ai_context():
         return "No specific data context loaded."
 
 @app.post("/api/chat")
-async def chat_endpoint(msg: ChatMessage):
+def chat_endpoint(msg: ChatMessage):
     if not api_key:
         raise HTTPException(status_code=500, detail="Groq API key missing. Please configure .env")
         
@@ -70,16 +68,28 @@ If the user asks one of the core 8 strategic questions, you must directly relate
 Be extremely professional, concise, and insightful. Format your response cleanly."""
 
     try:
-        completion = await client.chat.completions.create(
-            model="llama-3.1-8b-instant",
-            messages=[
+        import requests
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "model": "llama-3.1-8b-instant",
+            "messages": [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": msg.message}
             ],
-            temperature=0.7,
-            max_tokens=800
-        )
-        return {"response": completion.choices[0].message.content}
+            "temperature": 0.7,
+            "max_tokens": 800
+        }
+        # Using requests inside a standard sync route ensures FastAPI delegates it to a threadpool, bypassing all IPv6/httpx container deadlocks.
+        resp = requests.post("https://api.groq.com/openai/v1/chat/completions", headers=headers, json=payload, timeout=30)
+        
+        if resp.status_code != 200:
+            raise Exception(f"Groq API Error {resp.status_code}: {resp.text}")
+            
+        data = resp.json()
+        return {"response": data["choices"][0]["message"]["content"]}
     except Exception as e:
         logger.error(f"Chat API Error: {e}")
         raise HTTPException(status_code=500, detail=str(e))

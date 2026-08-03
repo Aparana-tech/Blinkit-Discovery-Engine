@@ -73,7 +73,7 @@ body {
 }
 
 .sidebar.collapsed .sidebar-toggle {
-    transform: translateX(260px) rotate(180deg);
+    transform: rotate(180deg);
 }
 
 .logo-section {

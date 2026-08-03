@@ -1,5 +1,19 @@
 document.addEventListener('DOMContentLoaded', async () => {
     // ----------------------------------------------------
+    // SIDEBAR TOGGLE
+    // ----------------------------------------------------
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.querySelector('.main-content');
+    
+    if (sidebarToggle && sidebar && mainContent) {
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+        });
+    }
+
+    // ----------------------------------------------------
     // SPA ROUTING
     // ----------------------------------------------------
     const navItems = document.querySelectorAll('.nav-item');

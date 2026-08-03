@@ -41,6 +41,39 @@ body {
     border-right: 1px solid var(--border-color);
     position: fixed;
     height: 100vh;
+    transition: transform 0.3s ease;
+    z-index: 100;
+}
+
+.sidebar.collapsed {
+    transform: translateX(-100%);
+}
+
+.sidebar-toggle {
+    position: absolute;
+    right: -32px;
+    top: 32px;
+    width: 32px;
+    height: 32px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+    color: var(--text-main);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 101;
+}
+
+.sidebar-toggle:hover {
+    background-color: var(--bg-card-hover);
+}
+
+.sidebar.collapsed .sidebar-toggle {
+    transform: translateX(260px) rotate(180deg);
 }
 
 .logo-section {
@@ -107,6 +140,11 @@ body {
     margin-left: 260px;
     padding: 32px 48px;
     max-width: 1200px;
+    transition: margin-left 0.3s ease;
+}
+
+.main-content.expanded {
+    margin-left: 0;
 }
 
 /* SPA VIEW HIDING */
@@ -692,6 +730,11 @@ body {
         padding: 16px;
         border-right: none;
         border-bottom: 1px solid var(--border-color);
+        transform: none !important;
+    }
+    
+    .sidebar-toggle {
+        display: none;
     }
     
     .nav-menu {

@@ -35,15 +35,14 @@ def get_ai_context():
             # Sort by size
             filtered.sort(key=lambda x: x.get("size", 0), reverse=True)
             
-            # Strip out the massive 'reviews' array from each cluster to save 90% of tokens
+            # Strip out the massive 'reviews' array and 'quote' to save massive amounts of tokens
             clean_context = []
-            for d in filtered[:15]:
+            for d in filtered[:5]: # Reduced from 15 to 5 to avoid Groq 6000 TPM rate limit
                 clean_context.append({
                     "theme": d.get("theme_name"),
                     "pillar": d.get("pillar"),
                     "insight": d.get("actionable_insight"),
-                    "mentions": d.get("size"),
-                    "quote": d.get("best_quote")
+                    "mentions": d.get("size")
                 })
                 
             return json.dumps(clean_context)
@@ -74,7 +73,7 @@ Be extremely professional, concise, and insightful. Format your response cleanly
             "Content-Type": "application/json"
         }
         payload = {
-            "model": "llama3-8b-8192",
+            "model": "llama-3.1-8b-instant",
             "messages": [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": msg.message}

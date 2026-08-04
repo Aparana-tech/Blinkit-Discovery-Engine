@@ -74,7 +74,7 @@ Be extremely professional, concise, and insightful. Format your response cleanly
             "Content-Type": "application/json"
         }
         payload = {
-            "model": "llama-3.1-8b-instant",
+            "model": "llama3-8b-8192",
             "messages": [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": msg.message}

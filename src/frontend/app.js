@@ -57,6 +57,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         const msg = chatInput.value.trim();
         if (!msg) return;
 
+        // Anti-spam cooldown
+        chatSend.disabled = true;
+        chatSend.style.opacity = '0.5';
+        setTimeout(() => {
+            chatSend.disabled = false;
+            chatSend.style.opacity = '1';
+        }, 5000);
+
         // Append user msg
         const userMsgDiv = document.createElement('div');
         userMsgDiv.className = 'chat-message user-message';
@@ -287,6 +295,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         const refreshInsightBtn = document.getElementById('refresh-insight-btn');
         if (refreshInsightBtn) {
             refreshInsightBtn.addEventListener('click', async () => {
+                // Anti-spam cooldown
+                refreshInsightBtn.disabled = true;
+                const originalText = refreshInsightBtn.innerText;
+                refreshInsightBtn.innerText = "Please wait 10s...";
+                refreshInsightBtn.style.opacity = '0.5';
+                
+                setTimeout(() => {
+                    refreshInsightBtn.disabled = false;
+                    refreshInsightBtn.innerText = originalText;
+                    refreshInsightBtn.style.opacity = '1';
+                }, 10000);
+
                 const insightBox = document.getElementById('qualitative-insight');
                 insightBox.innerHTML = `<h4 style="color: var(--accent-brand); margin-bottom: 12px;">Generating new AI narrative...</h4><p>Analyzing raw reviews...</p>`;
                 try {

@@ -298,7 +298,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // Anti-spam cooldown
                 refreshInsightBtn.disabled = true;
                 const originalText = refreshInsightBtn.innerText;
-                refreshInsightBtn.innerText = "Please wait 10s...";
+                refreshInsightBtn.innerText = "Please wait 10s for next...";
                 refreshInsightBtn.style.opacity = '0.5';
                 
                 setTimeout(() => {

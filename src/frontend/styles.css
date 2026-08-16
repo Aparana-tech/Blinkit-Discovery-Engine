@@ -565,29 +565,55 @@ body {
 
 /* DATA TABLE */
 .table-container {
-    background-color: var(--bg-card);
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
+    background-color: transparent;
+    overflow: visible;
+    border: none;
 }
 
 .data-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0 12px;
 }
 .data-table th, .data-table td {
-    padding: 16px;
+    padding: 24px;
     text-align: left;
-    border-bottom: 1px solid var(--border-color);
     font-size: 14px;
 }
 .data-table th {
-    background-color: var(--bg-card-hover);
+    background-color: transparent;
     color: var(--text-sub);
     font-weight: 600;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-bottom: none;
 }
-.data-table tr:hover {
+.data-table tbody tr {
+    background-color: var(--bg-card);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
+}
+.data-table td {
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.data-table td:first-child {
+    border-left: 1px solid var(--border-color);
+    border-radius: 8px 0 0 8px;
+}
+.data-table td:last-child {
+    border-right: 1px solid var(--border-color);
+    border-radius: 0 8px 8px 0;
+}
+.data-table tbody tr:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 10px 25px rgba(248, 203, 70, 0.15);
+}
+.data-table tbody tr:hover td {
     background-color: var(--bg-card-hover);
+    border-color: rgba(248, 203, 70, 0.4);
 }
 
 /* REVIEWS FEED */

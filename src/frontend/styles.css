@@ -628,12 +628,13 @@ body {
     border-radius: 8px;
     padding: 24px;
     cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 .review-card:hover {
     transform: translateY(-3px) scale(1.01);
     background-color: var(--bg-card-hover);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 25px rgba(248, 203, 70, 0.15);
+    border-color: rgba(248, 203, 70, 0.4);
 }
 .review-card:active {
     transform: scale(0.98);
@@ -662,15 +663,19 @@ body {
 }
 .persona-card {
     background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-top: 4px solid var(--accent-brand);
     border-radius: 12px;
     padding: 32px;
-    border-top: 4px solid var(--accent-brand);
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 .persona-card:hover {
     transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.6);
+    background-color: var(--bg-card-hover);
+    box-shadow: 0 10px 25px rgba(248, 203, 70, 0.15);
+    border-color: rgba(248, 203, 70, 0.4);
+    border-top-color: var(--accent-brand);
 }
 .persona-card:active {
     transform: scale(0.98);

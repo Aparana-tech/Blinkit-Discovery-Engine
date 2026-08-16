@@ -17,7 +17,7 @@ class LLMLabeler:
         else:
             self.client = Groq(api_key=api_key)
             
-        self.model = "llama-3.1-8b-instant" # Fast and smart enough for extraction
+        self.model = "openai/gpt-oss-20b" # Fast and smart enough for extraction
 
     def _get_system_prompt(self) -> str:
         return """You are the Blinkit Discovery Engine AI. 

@@ -73,7 +73,7 @@ Be extremely professional, concise, and insightful. Format your response cleanly
             "Content-Type": "application/json"
         }
         payload = {
-            "model": "llama-3.1-8b-instant",
+            "model": "openai/gpt-oss-20b",
             "messages": [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": msg.message}

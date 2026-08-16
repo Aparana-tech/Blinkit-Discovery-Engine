@@ -51,14 +51,14 @@ body {
 
 .sidebar-toggle {
     position: absolute;
-    right: -32px;
+    right: -1px;
     top: 32px;
     width: 32px;
     height: 32px;
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-left: none;
-    border-radius: 0 8px 8px 0;
+    border-right: none;
+    border-radius: 8px 0 0 8px;
     color: var(--text-main);
     cursor: pointer;
     display: flex;
@@ -66,6 +66,11 @@ body {
     justify-content: center;
     transition: all 0.3s ease;
     z-index: 101;
+    outline: none;
+}
+
+.sidebar-toggle:focus {
+    outline: none;
 }
 
 .sidebar-toggle:hover {
@@ -73,7 +78,7 @@ body {
 }
 
 .sidebar.collapsed .sidebar-toggle {
-    transform: rotate(180deg);
+    transform: translateX(31px) rotate(180deg);
 }
 
 .logo-section {

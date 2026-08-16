@@ -221,12 +221,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             data: {
                 labels: sortedDates,
                 datasets: [
-                    { label: 'Positive', data: trendDataPos, borderColor: '#2ecc71', tension: 0.4, borderWidth: 2, pointRadius: 0 },
-                    { label: 'Negative', data: trendDataNeg, borderColor: '#e91429', tension: 0.4, borderWidth: 2, pointRadius: 0 },
-                    { label: 'Neutral', data: trendDataNeu, borderColor: '#a7a7a7', tension: 0.4, borderWidth: 2, pointRadius: 0 }
+                    { label: 'Positive', data: trendDataPos, borderColor: '#2ecc71', backgroundColor: 'rgba(46, 204, 113, 0.15)', fill: true, tension: 0.4, borderWidth: 3, pointRadius: 4, pointHoverRadius: 6 },
+                    { label: 'Negative', data: trendDataNeg, borderColor: '#e91429', backgroundColor: 'rgba(233, 20, 41, 0.15)', fill: true, tension: 0.4, borderWidth: 3, pointRadius: 4, pointHoverRadius: 6 },
+                    { label: 'Neutral', data: trendDataNeu, borderColor: '#a7a7a7', backgroundColor: 'rgba(167, 167, 167, 0.15)', fill: true, tension: 0.4, borderWidth: 3, pointRadius: 4, pointHoverRadius: 6 }
                 ]
             },
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true } } }, scales: { y: { min: 0, max: 100, ticks: { callback: function(value) { return value + "%" } } } } }
+            options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true } } }, scales: { y: { min: 0, max: 100, ticks: { callback: function(value) { return value + "%" } } } } }
         });
 
         // Pillar Breakdown

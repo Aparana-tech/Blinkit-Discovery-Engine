@@ -459,11 +459,17 @@ body {
     font-size: 14px;
     cursor: pointer;
     margin-bottom: 24px;
-    transition: background-color 0.2s;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .refresh-btn:hover {
     background-color: #f1c40f;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(248, 203, 70, 0.4);
+}
+
+.refresh-btn:active {
+    transform: scale(0.98);
 }
 
 .insight-filters {
